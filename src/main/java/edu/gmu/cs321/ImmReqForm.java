@@ -13,6 +13,19 @@ public class ImmReqForm {
     private String gender;
     private String requestedForm;
 
+    public ImmReqForm(String firstName, String middleName, String lastName, LocalDate dateOfBirth, int ID, String email,
+            String race, String gender, String requestedForm) {
+        this.firstName = firstName;
+        this.middleName = middleName;
+        this.lastName = lastName;
+        this.dateOfBirth = dateOfBirth;
+        this.ID = ID;
+        this.email = email;
+        this.race = race;
+        this.gender = gender;
+        this.requestedForm = requestedForm;
+    }
+
     public String getFirstName() {
         return firstName;
     }

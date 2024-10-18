@@ -241,6 +241,16 @@ public class ImmReqForm {
         return true;
     }
 
+    /**
+     * @return returns true if the immigrant request form has been successfully
+     *         added to the workflow, false otherwise
+     * 
+     *         (WORKFLOW NOT YET IMPLEMENTED)
+     */
+    public boolean addWFItem() {
+        return true;
+    }
+
     public static class ImmReqValidator {
         /**
          * @param word word is the word being validated

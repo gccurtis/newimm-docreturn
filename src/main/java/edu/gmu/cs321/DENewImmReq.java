@@ -14,7 +14,7 @@ public class DENewImmReq {
      * @param race         race will be the stored race
      * @param gender       gender will be the stored race
      * @param requestedDoc requestedDoc will be the stored requested document
-     * @return returns a new ImmReqForm created using the pass parameters
+     * @return returns a new ImmReqForm created using the passed parameters
      */
     public ImmReqForm newImmReqForm(String firstName, String middleName, String lastName, LocalDate dateOfBirth, int ID,
             String email, String race, String gender, String requestedDoc) {

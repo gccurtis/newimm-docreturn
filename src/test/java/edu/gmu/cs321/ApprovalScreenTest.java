@@ -1,9 +1,10 @@
 package edu.gmu.cs321;
 
 import static org.junit.Assert.assertTrue;
-import org.junit.Test;
-import edu.gmu.cs321.ImmReqForm;
 
+import java.time.LocalDate;
+
+import org.junit.Test;
 
 public class ApprovalScreenTest {
     /**

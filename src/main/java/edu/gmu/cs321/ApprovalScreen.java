@@ -1,4 +1,5 @@
 package edu.gmu.cs321;
+
 import edu.gmu.cs321.ImmReqForm;
 
 public class ApprovalScreen {
@@ -30,7 +31,7 @@ public class ApprovalScreen {
      * Create the ApprovalScreen object and set up all
      * necessary objects.
      */
-    public ApprovalScreen(ImmReqForm userData, Workflow workflow){
+    public ApprovalScreen(ImmReqForm userData, Workflow workflow) {
         this.userData = userData;
         this.workflow = workflow;
         this.emailHandler = createEmailHandler(userData.getEmail());
@@ -47,8 +48,8 @@ public class ApprovalScreen {
         /**
          * This is where UI code will go.
          */
-        approvalDecision = false; //Just for testing.
-        reviewContext = "TEST"; //Just for testing.
+        approvalDecision = false; // Just for testing.
+        reviewContext = "TEST"; // Just for testing.
     }
 
     // Getter for userData
@@ -73,6 +74,6 @@ public class ApprovalScreen {
 
     // Prove emailHandler exists
     public boolean hasEmailHandler() {
-        emailHandler != null;
+        return (emailHandler != null);
     }
 }

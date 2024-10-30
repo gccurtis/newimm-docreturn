@@ -188,50 +188,6 @@ public class ImmReqForm {
     }
 
     /**
-     * @return returns true if all the fields of the immigrant request form pass
-     *         basic validation checks, false otherwise
-     */
-    public boolean validateNewImmReq() {
-        if (!ImmReqValidator.validateWord(firstName)) {
-            return false;
-        }
-
-        if (!ImmReqValidator.validateWord(middleName)) {
-            return false;
-        }
-
-        if (!ImmReqValidator.validateWord(lastName)) {
-            return false;
-        }
-
-        if (!ImmReqValidator.validateDOB(dateOfBirth)) {
-            return false;
-        }
-
-        if (!ImmReqValidator.validateID(ID)) {
-            return false;
-        }
-
-        if (!ImmReqValidator.validateEmail(email)) {
-            return false;
-        }
-
-        if (!ImmReqValidator.validateWord(race)) {
-            return false;
-        }
-
-        if (!ImmReqValidator.validateWord(gender)) {
-            return false;
-        }
-
-        if (!ImmReqValidator.validateWord(requestedDoc)) {
-            return false;
-        }
-
-        return true;
-    }
-
-    /**
      * @return returns true if the immigrant request form has been successfully
      *         saved to the database, false otherwise
      * 
@@ -249,49 +205,5 @@ public class ImmReqForm {
      */
     public boolean addWFItem() {
         return true;
-    }
-
-    public static class ImmReqValidator {
-        /**
-         * @param word word is the word being validated
-         * @return returns true if word isn't null or an empty string, false
-         *         otherwise
-         */
-        public static boolean validateWord(String word) {
-            if ((word == null) || (word.length() < 1))
-                return false;
-            return true;
-        }
-
-        /**
-         * @param dateOfBirth dateOfBirth is the date of birth being validated
-         * @return returns true if dateOfBirth isn't null, false otherwise
-         */
-        public static boolean validateDOB(LocalDate dateOfBirth) {
-            if (dateOfBirth == null)
-                return false;
-            return true;
-        }
-
-        /**
-         * @param ID ID is the ID being validated
-         * @return returns true if ID exists and is greater than 0, false otherwise
-         */
-        public static boolean validateID(int ID) {
-            if (ID < 0)
-                return false;
-            return true;
-        }
-
-        /**
-         * @param email email is the email being validated
-         * @return returns true if email isn't null and contains the "@" and "."
-         *         characters, false otherwise
-         */
-        public static boolean validateEmail(String email) {
-            if ((email == null) || (!email.contains("@")) || (!email.contains(".")))
-                return false;
-            return true;
-        }
     }
 }

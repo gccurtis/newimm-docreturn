@@ -4,8 +4,7 @@ import javafx.application.Application;
 import javafx.stage.Stage;
 
 /**
- * Hello world!
- *
+ * run using 'mvn clean javafx:run'
  */
 public class App extends Application {
     @Override

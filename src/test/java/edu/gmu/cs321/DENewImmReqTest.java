@@ -34,15 +34,6 @@ public class DENewImmReqTest {
     }
 
     /**
-     * Checks that the dateOfBirth field is validated with validateDOB
-     */
-    @Test
-    public void checkValidateDOB() {
-        ImmReqForm testForm = new ImmReqForm(null, null, null, LocalDate.of(2000, 1, 1), 0, null, null, null, null);
-        assertTrue(DENewImmReq.validateDOB(testForm.getDateOfBirth()));
-    }
-
-    /**
      * Checks that the ID field is validated with validateID
      */
     @Test

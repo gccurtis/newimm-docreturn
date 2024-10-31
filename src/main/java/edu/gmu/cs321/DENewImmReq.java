@@ -2,7 +2,6 @@ package edu.gmu.cs321;
 
 import java.time.LocalDate;
 
-import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import static javafx.geometry.HPos.RIGHT;
@@ -11,7 +10,6 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -44,12 +42,6 @@ public class DENewImmReq {
         TextField userTextField = new TextField();
         grid.add(userTextField, 1, 1);
 
-        Label pw = new Label("Password:");
-        grid.add(pw, 0, 2);
-
-        PasswordField pwBox = new PasswordField();
-        grid.add(pwBox, 1, 2);
-
         Button btn = new Button("Sign in");
         HBox hbBtn = new HBox(10);
         hbBtn.setAlignment(Pos.BOTTOM_RIGHT);
@@ -63,11 +55,11 @@ public class DENewImmReq {
         actiontarget.setId("actiontarget");
 
         btn.setOnAction(new EventHandler<ActionEvent>() {
-
             @Override
             public void handle(ActionEvent e) {
                 actiontarget.setFill(Color.FIREBRICK);
                 actiontarget.setText("Sign in button pressed");
+                actiontarget.setText(userTextField.getText());
             }
         });
 
@@ -88,11 +80,34 @@ public class DENewImmReq {
     }
 
     /**
-     * @param dateOfBirth dateOfBirth is the date of birth being validated
-     * @return returns true if dateOfBirth isn't null, false otherwise
+     * @param dateOfBirth dayOfBirth is the date of birth being validated
+     * @return returns true if dayOfBirth is within the range of 1-31, false
+     *         otherwise
      */
-    public static boolean validateDOB(LocalDate dateOfBirth) {
-        if (dateOfBirth == null)
+    public static boolean validateBirthDay(int dayOfBirth) {
+        if ((dayOfBirth < 1) || (dayOfBirth > 31))
+            return false;
+        return true;
+    }
+
+    /**
+     * @param monthOfBirth monthOfBirth is the date of birth being validated
+     * @return returns true if monthOfBirth is within the range of 1-12, false
+     *         otherwise
+     */
+    public static boolean validateBirthMonth(int monthOfBirth) {
+        if ((monthOfBirth < 1) || (monthOfBirth > 12))
+            return false;
+        return true;
+    }
+
+    /**
+     * @param yearOfBirth yearOfBirth is the date of birth being validated
+     * @return returns true if yearOfBirth is within the range of 1920-2024, false
+     *         otherwise
+     */
+    public static boolean validateBirthYear(int yearOfBirth) {
+        if ((yearOfBirth < 1920) || (yearOfBirth > 2024))
             return false;
         return true;
     }

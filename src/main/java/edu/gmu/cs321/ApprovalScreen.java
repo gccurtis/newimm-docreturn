@@ -1,7 +1,5 @@
 package edu.gmu.cs321;
 
-import edu.gmu.cs321.ImmReqForm;
-
 public class ApprovalScreen {
     /**
      * The data which needs to be checked for approval.

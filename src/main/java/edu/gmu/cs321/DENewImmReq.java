@@ -25,26 +25,38 @@ public class DENewImmReq {
 
     public DENewImmReq() {
         stage = new Stage();
-        stage.setTitle("JavaFX Welcome");
+        stage.setTitle("Document Request Form");
         GridPane grid = new GridPane();
         grid.setAlignment(Pos.CENTER);
         grid.setHgap(10);
         grid.setVgap(10);
         grid.setPadding(new Insets(25, 25, 25, 25));
 
-        Text scenetitle = new Text("Welcome");
+        Text scenetitle = new Text("Document Request Form");
         scenetitle.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
         grid.add(scenetitle, 0, 0, 2, 1);
 
-        Label userName = new Label("User Name:");
-        grid.add(userName, 0, 1);
+        Label firstName = new Label("First Name:");
+        grid.add(firstName, 0, 1);
 
-        TextField userTextField = new TextField();
-        grid.add(userTextField, 1, 1);
+        TextField firstNameTextField = new TextField();
+        grid.add(firstNameTextField, 1, 1);
 
-        Button btn = new Button("Sign in");
+        Label middleName = new Label("Middle Name:");
+        grid.add(middleName, 0, 2);
+
+        TextField middleNameTextField = new TextField();
+        grid.add(middleNameTextField, 1, 2);
+
+        Label lastName = new Label("Last Name:");
+        grid.add(lastName, 0, 3);
+
+        TextField lastNameTextField = new TextField();
+        grid.add(lastNameTextField, 1, 3);
+
+        Button btn = new Button("Submit");
         HBox hbBtn = new HBox(10);
-        hbBtn.setAlignment(Pos.BOTTOM_RIGHT);
+        hbBtn.setAlignment(Pos.BASELINE_RIGHT);
         hbBtn.getChildren().add(btn);
         grid.add(hbBtn, 1, 4);
 
@@ -59,7 +71,7 @@ public class DENewImmReq {
             public void handle(ActionEvent e) {
                 actiontarget.setFill(Color.FIREBRICK);
                 actiontarget.setText("Sign in button pressed");
-                actiontarget.setText(userTextField.getText());
+                actiontarget.setText(firstNameTextField.getText());
             }
         });
 

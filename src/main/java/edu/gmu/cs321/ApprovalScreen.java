@@ -47,7 +47,7 @@ public class ApprovalScreen {
          * This is where UI code will go.
          */
         approvalDecision = false; // Just for testing.
-        reviewContext = "TEST"; // Just for testing.
+        reviewContext = "Test"; // Just for testing.
     }
 
     // Getter for userData

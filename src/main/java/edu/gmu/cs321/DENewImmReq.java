@@ -34,34 +34,70 @@ public class DENewImmReq {
 
         Text scenetitle = new Text("Document Request Form");
         scenetitle.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
-        grid.add(scenetitle, 0, 0, 2, 1);
+        grid.add(scenetitle, 0, 0, 1, 1);
 
-        Label firstName = new Label("First Name:");
-        grid.add(firstName, 0, 1);
+        Label firstNameLabel = new Label("First Name:");
+        grid.add(firstNameLabel, 0, 1);
 
         TextField firstNameTextField = new TextField();
         grid.add(firstNameTextField, 1, 1);
 
-        Label middleName = new Label("Middle Name:");
-        grid.add(middleName, 0, 2);
+        Label middleNameLabel = new Label("Middle Name:");
+        grid.add(middleNameLabel, 0, 2);
 
         TextField middleNameTextField = new TextField();
         grid.add(middleNameTextField, 1, 2);
 
-        Label lastName = new Label("Last Name:");
-        grid.add(lastName, 0, 3);
+        Label lastNameLabel = new Label("Last Name:");
+        grid.add(lastNameLabel, 0, 3);
 
         TextField lastNameTextField = new TextField();
         grid.add(lastNameTextField, 1, 3);
+
+        Label dateOfBirthLabel = new Label("Date of Birth (MM/DD/YYYY):");
+        grid.add(dateOfBirthLabel, 0, 4);
+
+        TextField dateOfBirthTextField = new TextField();
+        grid.add(dateOfBirthTextField, 1, 4);
+
+        Label iDLabel = new Label("ID:");
+        grid.add(iDLabel, 0, 5);
+
+        TextField iDTextField = new TextField();
+        grid.add(iDTextField, 1, 5);
+
+        Label emailLabel = new Label("Email:");
+        grid.add(emailLabel, 0, 6);
+
+        TextField emailTextField = new TextField();
+        grid.add(emailTextField, 1, 6);
+
+        Label raceLabel = new Label("Race:");
+        grid.add(raceLabel, 0, 7);
+
+        TextField raceTextField = new TextField();
+        grid.add(raceTextField, 1, 7);
+
+        Label genderLabel = new Label("Gender:");
+        grid.add(genderLabel, 0, 8);
+
+        TextField genderTextField = new TextField();
+        grid.add(genderTextField, 1, 8);
+
+        Label requestedFormLabel = new Label("Requested Form:");
+        grid.add(requestedFormLabel, 0, 9);
+
+        TextField requestedFormTextField = new TextField();
+        grid.add(requestedFormTextField, 1, 9);
 
         Button btn = new Button("Submit");
         HBox hbBtn = new HBox(10);
         hbBtn.setAlignment(Pos.BASELINE_RIGHT);
         hbBtn.getChildren().add(btn);
-        grid.add(hbBtn, 1, 4);
+        grid.add(hbBtn, 1, 10);
 
         final Text actiontarget = new Text();
-        grid.add(actiontarget, 0, 6);
+        grid.add(actiontarget, 0, 12);
         grid.setColumnSpan(actiontarget, 2);
         grid.setHalignment(actiontarget, RIGHT);
         actiontarget.setId("actiontarget");
@@ -71,11 +107,20 @@ public class DENewImmReq {
             public void handle(ActionEvent e) {
                 actiontarget.setFill(Color.FIREBRICK);
                 actiontarget.setText("Sign in button pressed");
-                actiontarget.setText(firstNameTextField.getText());
+                String firstName = firstNameTextField.getText();
+                String middleName = middleNameTextField.getText();
+                String lastName = lastNameTextField.getText();
+                String dateOfBirth = dateOfBirthTextField.getText();
+                String iD = iDTextField.getText();
+                String email = emailTextField.getText();
+                String race = raceTextField.getText();
+                String gender = genderTextField.getText();
+                String requestedForm = requestedFormTextField.getText();
+                actiontarget.setText(firstName);
             }
         });
 
-        Scene scene = new Scene(grid, 300, 275);
+        Scene scene = new Scene(grid, 370, 435);
         stage.setScene(scene);
         stage.show();
     }
@@ -125,11 +170,11 @@ public class DENewImmReq {
     }
 
     /**
-     * @param ID ID is the ID being validated
+     * @param iD iD is the ID being validated
      * @return returns true if ID exists and is greater than 0, false otherwise
      */
-    public static boolean validateID(int ID) {
-        if (ID < 0)
+    public static boolean validateID(int iD) {
+        if (iD < 0)
             return false;
         return true;
     }

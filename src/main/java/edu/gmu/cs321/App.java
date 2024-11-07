@@ -6,7 +6,6 @@ import java.util.Scanner;
 
 /**
  * run using 'mvn clean javafx:run'
- * Dumb, random comment
  */
 public class App extends Application {
 	@Override

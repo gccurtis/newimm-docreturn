@@ -19,11 +19,29 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
 public class ApprovalScreenUI {
 
     private Stage stage;
 
+
+    private void databaseTest() {
+	    String url = "jdbc:mysql://localhost:3306/testdb";
+	    String username = "cs321";
+	    String password = "password";
+
+	    try (Connection connection = DriverManager.getConnection(url, username, password)) {
+		    System.out.println("YES");
+	    } catch(SQLException e) {
+		    throw new IllegalStateException("Database error");
+	    }
+    }
+
     public ApprovalScreenUI() {
+	databaseTest();
 	//Create a function to pass next ImmReqForm
 	ImmReqForm immData = new ImmReqForm("Azek","Mirus","Lyrenidae",LocalDate.of(2000,1,1),1,"gccurtis001@gmail.com","ambiguous","ambiguous","Form1");
 	

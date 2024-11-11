@@ -22,7 +22,7 @@ public class ImmReqForm {
     /**
      * The ID of the immigrant
      */
-    private int iD;
+    private int id;
     /**
      * The email of the immigrant
      */
@@ -43,13 +43,13 @@ public class ImmReqForm {
     /**
      * The constructor for the immigrant request form
      */
-    public ImmReqForm(String firstName, String middleName, String lastName, LocalDate dateOfBirth, int iD, String email,
+    public ImmReqForm(String firstName, String middleName, String lastName, LocalDate dateOfBirth, int id, String email,
             String race, String gender, String requestedDoc) {
         this.firstName = firstName;
         this.middleName = middleName;
         this.lastName = lastName;
         this.dateOfBirth = dateOfBirth;
-        this.iD = iD;
+        this.id = id;
         this.email = email;
         this.race = race;
         this.gender = gender;
@@ -120,14 +120,14 @@ public class ImmReqForm {
      * @return returns the stored ID of the immigrant request form
      */
     public int getID() {
-        return iD;
+        return id;
     }
 
     /**
-     * @param iD sets the stored ID of the immigrant request form to ID
+     * @param id sets the stored ID of the immigrant request form to ID
      */
-    public void setID(int iD) {
-        this.iD = iD;
+    public void setID(int id) {
+        this.id = id;
     }
 
     /**

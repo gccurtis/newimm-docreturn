@@ -102,6 +102,8 @@ public class DENewImmReq {
         grid.setHalignment(actiontarget, RIGHT);
         actiontarget.setId("actiontarget");
 
+        String invalidInput = "Invalid Input";
+
         btn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e) {
@@ -111,12 +113,36 @@ public class DENewImmReq {
                 String middleName = middleNameTextField.getText();
                 String lastName = lastNameTextField.getText();
                 String dateOfBirth = dateOfBirthTextField.getText();
-                String iD = iDTextField.getText();
+                String idString = iDTextField.getText();
                 String email = emailTextField.getText();
                 String race = raceTextField.getText();
                 String gender = genderTextField.getText();
                 String requestedForm = requestedFormTextField.getText();
-                actiontarget.setText(firstName);
+
+                try {
+                    String[] dateInfo = dateOfBirth.split("/");
+                    if (dateInfo.length == 3) {
+                        int month = Integer.parseInt(dateInfo[0]);
+                        int day = Integer.parseInt(dateInfo[1]);
+                        int year = Integer.parseInt(dateInfo[2]);
+                        int id = Integer.parseInt(idString);
+                        if (validateWord(firstName) && validateWord(middleName) && validateWord(lastName)
+                                && validateID(id) && validateWord(email) && validateWord(race)
+                                && validateWord(gender) && validateWord(requestedForm)) {
+                            ImmReqForm newImmReqForm = new ImmReqForm(firstName, middleName, lastName,
+                                    LocalDate.of(year, month, day), id, email, race, gender, requestedForm);
+                            newImmReqForm.saveImmReqForm();
+                            newImmReqForm.addWFItem();
+                            actiontarget.setText("New Request Form Submitted");
+                        } else {
+                            actiontarget.setText(invalidInput);
+                        }
+                    } else {
+                        actiontarget.setText(invalidInput);
+                    }
+                } catch (Exception x) {
+                    actiontarget.setText(invalidInput);
+                }
             }
         });
 
@@ -137,34 +163,12 @@ public class DENewImmReq {
     }
 
     /**
-     * @param dateOfBirth dayOfBirth is the date of birth being validated
-     * @return returns true if dayOfBirth is within the range of 1-31, false
-     *         otherwise
-     */
-    public static boolean validateBirthDay(int dayOfBirth) {
-        if ((dayOfBirth < 1) || (dayOfBirth > 31))
-            return false;
-        return true;
-    }
-
-    /**
-     * @param monthOfBirth monthOfBirth is the date of birth being validated
-     * @return returns true if monthOfBirth is within the range of 1-12, false
-     *         otherwise
-     */
-    public static boolean validateBirthMonth(int monthOfBirth) {
-        if ((monthOfBirth < 1) || (monthOfBirth > 12))
-            return false;
-        return true;
-    }
-
-    /**
      * @param yearOfBirth yearOfBirth is the date of birth being validated
      * @return returns true if yearOfBirth is within the range of 1920-2024, false
      *         otherwise
      */
     public static boolean validateBirthYear(int yearOfBirth) {
-        if ((yearOfBirth < 1920) || (yearOfBirth > 2024))
+        if ((yearOfBirth < 1900) || (yearOfBirth > 2024))
             return false;
         return true;
     }

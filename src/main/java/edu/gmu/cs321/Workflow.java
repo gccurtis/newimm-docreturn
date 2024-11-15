@@ -9,27 +9,6 @@ import java.sql.SQLException;
 
 public class Workflow {
 
-	public class WorkflowItem {
-		private ImmReqForm form;
-		private String context;
-
-		public WorkflowItem(ImmReqForm form) {
-			this.form = form;
-		}
-
-		public void addContext(String context) {
-			this.context = context;
-		}
-
-		public String getContext() {
-			return this.context;
-		}
-
-		public ImmReqForm getForm() {
-			return this.form;
-		}
-	}
-
 	private Queue<WorkflowItem> queue;
 
 	public Workflow() {
@@ -53,17 +32,18 @@ public class Workflow {
 		String user = "cs321";
 		String password = "password";
 
-		String sqlInsertQuery = "INSERT INTO users (id, firstName, middleName, lastName, email, race, gender, requestedDoc) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+		String sqlInsertQuery = "INSERT INTO testdb (id, firstName, middleName, lastName, dateOfBirth, email, race, gender, requestedDoc, context) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
 		try (Connection conn = DriverManager.getConnection(url,user,password); PreparedStatement pstmt = conn.prepareStatement(sqlInsertQuery)) {
 			pstmt.setString(2,wfi.getForm().getFirstName());
 			pstmt.setString(3,wfi.getForm().getMiddleName());
 			pstmt.setString(4,wfi.getForm().getLastName());
-			//pstmt.setString(5,"");
-			pstmt.setString(5,wfi.getForm().getEmail());
-			pstmt.setString(6,wfi.getForm().getRace());
-			pstmt.setString(7,wfi.getForm().getGender());
-			pstmt.setString(8,wfi.getForm().getRequestedDoc());
+			pstmt.setString(5,null);
+			pstmt.setString(6,wfi.getForm().getEmail());
+			pstmt.setString(7,wfi.getForm().getRace());
+			pstmt.setString(8,wfi.getForm().getGender());
+			pstmt.setString(9,wfi.getForm().getRequestedDoc());
+			pstmt.setString(10,null);
 			pstmt.setInt(1, wfi.getForm().getID());
 
 			int rowsAffected = pstmt.executeUpdate();

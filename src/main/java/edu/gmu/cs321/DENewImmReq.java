@@ -133,6 +133,9 @@ public class DENewImmReq {
                                     LocalDate.of(year, month, day), id, email, race, gender, requestedForm);
                             newImmReqForm.saveImmReqForm();
                             newImmReqForm.addWFItem();
+                            Workflow thing = new Workflow();
+                            WorkflowItem test = new WorkflowItem(newImmReqForm);
+                            thing.addWorkflowItemToDB(test);
                             actiontarget.setText("New Request Form Submitted");
                         } else {
                             actiontarget.setText(invalidInput);

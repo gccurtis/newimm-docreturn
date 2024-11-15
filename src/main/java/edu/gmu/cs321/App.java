@@ -13,10 +13,11 @@ public class App extends Application {
 		String screenType = System.getProperty("screen.type");
 		ApprovalScreenUI testa;
 		DENewImmReq testde;
+		Workflow wf = new Workflow();
 		if (screenType.equals("E"))
-			testde = new DENewImmReq();
+			testde = new DENewImmReq(wf);
 		if (screenType.equals("A"))
-			testa = new ApprovalScreenUI();
+			testa = new ApprovalScreenUI(wf);
 	}
 
 	public static void main(String[] args) {

@@ -6,6 +6,7 @@ import java.util.LinkedList;
 import java.sql.Connection;
 import java.sql.Statement;
 import java.sql.ResultSet;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -78,7 +79,7 @@ public class Workflow {
 			pstmt.setString(2,wfi.getForm().getFirstName());
 			pstmt.setString(3,wfi.getForm().getMiddleName());
 			pstmt.setString(4,wfi.getForm().getLastName());
-			pstmt.setString(5,null);
+			pstmt.setDate(5, Date.valueOf(wfi.getForm().getDateOfBirth()));
 			pstmt.setString(6,wfi.getForm().getEmail());
 			pstmt.setString(7,wfi.getForm().getRace());
 			pstmt.setString(8,wfi.getForm().getGender());

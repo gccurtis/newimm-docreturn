@@ -23,7 +23,7 @@ public class DENewImmReq {
 
     private Stage stage;
 
-    public DENewImmReq(Workflow wf) {
+    public DENewImmReq(Workflow workflow) {
         stage = new Stage();
         stage.setTitle("Document Request Form");
         GridPane grid = new GridPane();
@@ -131,11 +131,9 @@ public class DENewImmReq {
                                 && validateWord(gender) && validateWord(requestedForm)) {
                             ImmReqForm newImmReqForm = new ImmReqForm(firstName, middleName, lastName,
                                     LocalDate.of(year, month, day), id, email, race, gender, requestedForm);
-                            newImmReqForm.saveImmReqForm();
-                            newImmReqForm.addWFItem();
-                            Workflow thing = new Workflow();
-                            WorkflowItem test = new WorkflowItem(newImmReqForm);
-                            thing.addWorkflowItemToDB(test);
+                            WorkflowItem newWorkflowItem = new WorkflowItem(newImmReqForm);
+                            workflow.addWorkflowItemToDB(newWorkflowItem);
+                            workflow.addNewWorkflowItem(newWorkflowItem);
                             actiontarget.setText("New Request Form Submitted");
                         } else {
                             actiontarget.setText(invalidInput);

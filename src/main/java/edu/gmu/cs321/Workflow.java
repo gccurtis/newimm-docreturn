@@ -1,8 +1,9 @@
 package edu.gmu.cs321;
 
 import java.util.Queue;
-import java.util.PriorityQueue;	
+import java.util.PriorityQueue;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -34,16 +35,17 @@ public class Workflow {
 
 		String sqlInsertQuery = "INSERT INTO testdb (id, firstName, middleName, lastName, dateOfBirth, email, race, gender, requestedDoc, context) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
-		try (Connection conn = DriverManager.getConnection(url,user,password); PreparedStatement pstmt = conn.prepareStatement(sqlInsertQuery)) {
-			pstmt.setString(2,wfi.getForm().getFirstName());
-			pstmt.setString(3,wfi.getForm().getMiddleName());
-			pstmt.setString(4,wfi.getForm().getLastName());
-			pstmt.setString(5,null);
-			pstmt.setString(6,wfi.getForm().getEmail());
-			pstmt.setString(7,wfi.getForm().getRace());
-			pstmt.setString(8,wfi.getForm().getGender());
-			pstmt.setString(9,wfi.getForm().getRequestedDoc());
-			pstmt.setString(10,null);
+		try (Connection conn = DriverManager.getConnection(url, user, password);
+				PreparedStatement pstmt = conn.prepareStatement(sqlInsertQuery)) {
+			pstmt.setString(2, wfi.getForm().getFirstName());
+			pstmt.setString(3, wfi.getForm().getMiddleName());
+			pstmt.setString(4, wfi.getForm().getLastName());
+			pstmt.setDate(5, Date.valueOf(wfi.getForm().getDateOfBirth()));
+			pstmt.setString(6, wfi.getForm().getEmail());
+			pstmt.setString(7, wfi.getForm().getRace());
+			pstmt.setString(8, wfi.getForm().getGender());
+			pstmt.setString(9, wfi.getForm().getRequestedDoc());
+			pstmt.setString(10, null);
 			pstmt.setInt(1, wfi.getForm().getID());
 
 			int rowsAffected = pstmt.executeUpdate();

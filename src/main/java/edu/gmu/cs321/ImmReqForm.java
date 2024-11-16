@@ -186,24 +186,4 @@ public class ImmReqForm {
     public void setRequestedDoc(String requestedDoc) {
         this.requestedDoc = requestedDoc;
     }
-
-    /**
-     * @return returns true if the immigrant request form has been successfully
-     *         saved to the database, false otherwise
-     * 
-     *         (DATABASE NOT YET IMPLEMENTED)
-     */
-    public boolean saveImmReqForm() {
-        return true;
-    }
-
-    /**
-     * @return returns true if the immigrant request form has been successfully
-     *         added to the workflow, false otherwise
-     * 
-     *         (WORKFLOW NOT YET IMPLEMENTED)
-     */
-    public boolean addWFItem() {
-        return true;
-    }
 }

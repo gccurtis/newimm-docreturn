@@ -27,27 +27,13 @@ public class ApprovalScreenUI {
 
     private Stage stage;
 
-    private void databaseTest() {
-        String url = "jdbc:mysql://localhost:3306/testdb";
-        String username = "cs321";
-        String password = "password";
-
-        try (Connection connection = DriverManager.getConnection(url, username, password)) {
-            System.out.println("YES");
-        } catch (SQLException e) {
-            System.out.println("SQLException: " + e.getMessage());
-            System.out.println("SQLState: " + e.getSQLState());
-            System.out.println("VendorError: " + e.getErrorCode());
-            throw new IllegalStateException("Database error");
-        }
-    }
-
-    public ApprovalScreenUI() {
-        databaseTest();
+    public ApprovalScreenUI(Workflow wf) {
         // Create a function to pass next ImmReqForm
-        ImmReqForm immData = new ImmReqForm("Azek", "Mirus", "Lyrenidae", LocalDate.of(2000, 1, 1), 1,
-                "gccurtis001@gmail.com", "ambiguous", "ambiguous", "Form1");
-
+        //ImmReqForm immData = new ImmReqForm("Azek", "Mirus", "Lyrenidae", LocalDate.of(2000, 1, 1), 1,
+        //        "gccurtis001@gmail.com", "ambiguous", "ambiguous", "Form1");
+	
+	ImmReqForm immData = wf.getNextWorkflowItem().getForm();
+	
         stage = new Stage();
         stage.setTitle("Document Request Approval");
         GridPane grid = new GridPane();

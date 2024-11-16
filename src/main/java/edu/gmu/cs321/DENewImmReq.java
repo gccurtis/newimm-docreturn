@@ -23,7 +23,7 @@ public class DENewImmReq {
 
     private Stage stage;
 
-    public DENewImmReq() {
+    public DENewImmReq(Workflow wf) {
         stage = new Stage();
         stage.setTitle("Document Request Form");
         GridPane grid = new GridPane();

@@ -39,7 +39,7 @@ public class Workflow {
 							rs.getString("firstName"),
 							rs.getString("middleName"),
 							rs.getString("lastName"),
-							null,
+							rs.getDate("dateOfBirth").toLocalDate(),
 							rs.getInt("id"),
 							rs.getString("email"),
 							rs.getString("race"),

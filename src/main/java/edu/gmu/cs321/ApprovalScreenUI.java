@@ -63,8 +63,8 @@ public class ApprovalScreenUI {
 
         Label dateOfBirthLabel = new Label("Date of Birth (MM/DD/YYYY):");
         grid.add(dateOfBirthLabel, 0, 4);
-        //Label dateOfBirthVal = new Label(immData.getDateOfBirth().toString());
-        Label dateOfBirthVal = new Label("Work-In-Progress");
+        Label dateOfBirthVal = new Label(immData.getDateOfBirth().toString());
+        //Label dateOfBirthVal = new Label("Work-In-Progress");
 	grid.add(dateOfBirthVal, 1, 4);
 
         Label idLabel = new Label("ID:");

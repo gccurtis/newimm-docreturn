@@ -131,9 +131,8 @@ public class DENewImmReq {
                                 && validateWord(gender) && validateWord(requestedForm)) {
                             ImmReqForm newImmReqForm = new ImmReqForm(firstName, middleName, lastName,
                                     LocalDate.of(year, month, day), id, email, race, gender, requestedForm);
-                            WorkflowItem newWorkflowItem = new WorkflowItem(newImmReqForm);
+                            WorkflowItem newWorkflowItem = new WorkflowItem(newImmReqForm, true);
                             workflow.addWorkflowItemToDB(newWorkflowItem);
-                            workflow.addNewWorkflowItem(newWorkflowItem);
                             actiontarget.setText("New Request Form Submitted");
                         } else {
                             actiontarget.setText(invalidInput);

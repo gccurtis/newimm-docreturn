@@ -29,10 +29,22 @@ public class ApprovalScreenUI {
 
     public ApprovalScreenUI(Workflow wf) {
         // Create a function to pass next ImmReqForm
-        //ImmReqForm immData = new ImmReqForm("Azek", "Mirus", "Lyrenidae", LocalDate.of(2000, 1, 1), 1,
-        //        "gccurtis001@gmail.com", "ambiguous", "ambiguous", "Form1");
+	// TODO: Handle an empty database
 	
-	ImmReqForm immData = wf.getNextWorkflowItem().getForm();
+	WorkflowItem wfi = wf.getNextWorkflowItem();
+	if (wfi == null) {
+		System.out.println("No DATA 1");
+		return;
+	}
+	while (wfi.getReviewFlag()) {
+		wfi = wf.getNextWorkflowItem();
+		if (wfi == null) {
+			System.out.println("No DATA");
+			return;
+		}
+	}
+
+	ImmReqForm immData = wfi.getForm();
 	
         stage = new Stage();
         stage.setTitle("Document Request Approval");

@@ -44,7 +44,7 @@ public class Workflow {
 							rs.getString("email"),
 							rs.getString("race"),
 							rs.getString("gender"),
-							rs.getString("requestedDoc"))));
+							rs.getString("requestedDoc")),rs.getBoolean("reviewFlag")));
 		}
 		} catch (SQLException e) {
 			handleSQLException(e);
@@ -64,16 +64,12 @@ public class Workflow {
 		this.queue.add(wfi);
 	}
 
-	public void addImmReqForm(ImmReqForm form) {
-		this.queue.add(new WorkflowItem(form));
-	}
-
 	public WorkflowItem getNextWorkflowItem() {
 		return this.queue.poll();
 	}
 
 	public void addWorkflowItemToDB(WorkflowItem wfi) {
-		String sqlInsertQuery = "INSERT INTO testdb (id, firstName, middleName, lastName, dateOfBirth, email, race, gender, requestedDoc, context) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+		String sqlInsertQuery = "INSERT INTO testdb (id, firstName, middleName, lastName, dateOfBirth, email, race, gender, requestedDoc, reviewFlag, context) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
 		try (Connection conn = getConnection(); PreparedStatement pstmt = conn.prepareStatement(sqlInsertQuery)) {
 			pstmt.setString(2,wfi.getForm().getFirstName());
@@ -84,7 +80,8 @@ public class Workflow {
 			pstmt.setString(7,wfi.getForm().getRace());
 			pstmt.setString(8,wfi.getForm().getGender());
 			pstmt.setString(9,wfi.getForm().getRequestedDoc());
-			pstmt.setString(10,null);
+			pstmt.setBoolean(10,wfi.getReviewFlag());
+			pstmt.setString(11,null);
 			pstmt.setInt(1, wfi.getForm().getID());
 
 			int rowsAffected = pstmt.executeUpdate();

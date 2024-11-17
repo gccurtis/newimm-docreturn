@@ -13,10 +13,13 @@ public class App extends Application {
 		String screenType = System.getProperty("screen.type");
 		ApprovalScreenUI testa;
 		DENewImmReq testde;
+		ReviewerScreenUI reviewer;
 		if (screenType.equals("E"))
 			testde = new DENewImmReq();
 		if (screenType.equals("A"))
 			testa = new ApprovalScreenUI();
+		if (screenType.equals("R"))
+			reviewer = new ReviewerScreenUI();
 	}
 
 	public static void main(String[] args) {
@@ -27,6 +30,8 @@ public class App extends Application {
 
 		if (choice == 1)
 			System.setProperty("screen.type", "E");
+		if (choice == 2)
+			System.setProperty("screen.type", "R");
 		if (choice == 3)
 			System.setProperty("screen.type", "A");
 		launch(args);

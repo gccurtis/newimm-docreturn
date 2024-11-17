@@ -61,20 +61,51 @@ public class ApprovalScreenUI {
         Label lastNameVal = new Label(immData.getLastName());
         grid.add(lastNameVal, 1, 3);
 
+        Label dateOfBirthLabel = new Label("Date of Birth (MM/DD/YYYY):");
+        grid.add(dateOfBirthLabel, 0, 4);
+        //Label dateOfBirthVal = new Label(immData.getDateOfBirth().toString());
+        Label dateOfBirthVal = new Label("Work-In-Progress");
+	grid.add(dateOfBirthVal, 1, 4);
+
+        Label idLabel = new Label("ID:");
+        grid.add(idLabel, 0, 5);
+        Label idVal = new Label(new Integer(immData.getID()).toString());
+        grid.add(idVal, 1, 5);
+
+        Label emailLabel = new Label("Email:");
+        grid.add(emailLabel, 0, 6);
+        Label emailVal = new Label(immData.getEmail());
+        grid.add(emailVal, 1, 6);
+
+        Label raceLabel = new Label("Race:");
+        grid.add(raceLabel, 0, 7);
+        Label raceVal = new Label(immData.getRace());
+        grid.add(raceVal, 1, 7);
+
+        Label genderLabel = new Label("Gender:");
+        grid.add(genderLabel, 0, 8);
+        Label genderVal = new Label(immData.getGender());
+        grid.add(genderVal, 1, 8);
+
+        Label requestedFormLabel = new Label("Requested Form:");
+        grid.add(requestedFormLabel, 0, 9);
+        Label requestedFormVal = new Label(immData.getRequestedDoc());
+        grid.add(requestedFormVal, 1, 9);
+
         Button btn = new Button("Approve");
         HBox hbBtn = new HBox(10);
         hbBtn.setAlignment(Pos.BASELINE_LEFT);
         hbBtn.getChildren().add(btn);
-        grid.add(hbBtn, 0, 4);
+        grid.add(hbBtn, 0, 10);
 
         Button btn2 = new Button("Reject");
         HBox hbBtn2 = new HBox(10);
         hbBtn2.setAlignment(Pos.BASELINE_RIGHT);
         hbBtn2.getChildren().add(btn2);
-        grid.add(hbBtn2, 1, 4);
+        grid.add(hbBtn2, 1, 10);
 
         final Text actiontarget = new Text();
-        grid.add(actiontarget, 0, 6);
+        grid.add(actiontarget, 0, 12);
         grid.setColumnSpan(actiontarget, 2);
         grid.setHalignment(actiontarget, RIGHT);
         actiontarget.setId("actiontarget");
@@ -95,7 +126,7 @@ public class ApprovalScreenUI {
             }
         });
 
-        Scene scene = new Scene(grid, 400, 300);
+        Scene scene = new Scene(grid, 400, 400);
         stage.setScene(scene);
         stage.show();
     }

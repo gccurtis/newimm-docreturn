@@ -109,6 +109,8 @@ public class DENewImmReq {
             public void handle(ActionEvent e) {
                 actiontarget.setFill(Color.FIREBRICK);
                 actiontarget.setText("Sign in button pressed");
+
+                // Gathers user input from the fields
                 String firstName = firstNameTextField.getText();
                 String middleName = middleNameTextField.getText();
                 String lastName = lastNameTextField.getText();
@@ -119,6 +121,7 @@ public class DENewImmReq {
                 String gender = genderTextField.getText();
                 String requestedForm = requestedFormTextField.getText();
 
+                // Parses the gathered input to create a new ImmReqForm
                 try {
                     String[] dateInfo = dateOfBirth.split("/");
                     if (dateInfo.length == 3) {
@@ -131,6 +134,9 @@ public class DENewImmReq {
                                 && validateWord(gender) && validateWord(requestedForm)) {
                             ImmReqForm newImmReqForm = new ImmReqForm(firstName, middleName, lastName,
                                     LocalDate.of(year, month, day), id, email, race, gender, requestedForm);
+
+                            // Turns the ImmReqForm into a WorkflowItem and adds it to the database and
+                            // workflow
                             WorkflowItem newWorkflowItem = new WorkflowItem(newImmReqForm, true);
                             workflow.addWorkflowItemToDB(newWorkflowItem);
                             actiontarget.setText("New Request Form Submitted");

@@ -131,6 +131,23 @@ public class ApprovalScreenUI {
                 actiontarget.setFill(Color.FIREBRICK);
                 actiontarget.setText("Application approved");
 		wf.dropImmReqForm(immData.getID());
+
+		ImmReqForm immData2 = nextImmReqFormFromWorkflow(wf, false);
+		if (immData2 == null) {
+			System.out.println("No DATA");
+			System.exit(0);
+			return;
+		}
+
+		firstNameVal.setText(immData2.getFirstName());
+		middleNameVal.setText(immData2.getMiddleName());
+		lastNameVal.setText(immData2.getLastName());
+		dateOfBirthVal.setText(immData2.getDateOfBirth().toString());
+		idVal.setText(new Integer(immData2.getID()).toString());
+		emailVal.setText(immData2.getEmail());
+		raceVal.setText(immData2.getRace());
+		genderVal.setText(immData2.getGender());
+		requestedFormVal.setText(immData2.getRequestedDoc());
             }
         });
 
@@ -141,6 +158,23 @@ public class ApprovalScreenUI {
                 actiontarget.setText("Application sent to Reviewer");
 		wf.dropImmReqForm(immData.getID());
 		wf.addWorkflowItemToDB(new WorkflowItem(immData,true));
+
+		ImmReqForm immData2 = nextImmReqFormFromWorkflow(wf, false);
+		if (immData2 == null) {
+			System.out.println("No DATA");
+			System.exit(0);
+			return;
+		}
+
+		firstNameVal.setText(immData2.getFirstName());
+		middleNameVal.setText(immData2.getMiddleName());
+		lastNameVal.setText(immData2.getLastName());
+		dateOfBirthVal.setText(immData2.getDateOfBirth().toString());
+		idVal.setText(new Integer(immData2.getID()).toString());
+		emailVal.setText(immData2.getEmail());
+		raceVal.setText(immData2.getRace());
+		genderVal.setText(immData2.getGender());
+		requestedFormVal.setText(immData2.getRequestedDoc());
             }
         });
 

@@ -171,6 +171,23 @@ public class ReviewerScreenUI {
 			immData.setRequestedDoc(requestedForm);
 		wf.dropImmReqForm(immData.getID());
 		wf.addWorkflowItemToDB(new WorkflowItem(immData, false));
+
+		ImmReqForm immData2 = nextImmReqFormFromWorkflow(wf, true);
+		if (immData2 == null) {
+			System.out.println("No DATA");
+			System.exit(0);
+			return;
+		}
+
+		firstNameVal.setText(immData2.getFirstName());
+		middleNameVal.setText(immData2.getMiddleName());
+		lastNameVal.setText(immData2.getLastName());
+		dateOfBirthVal.setText(immData2.getDateOfBirth().toString());
+		idVal.setText(new Integer(immData2.getID()).toString());
+		emailVal.setText(immData2.getEmail());
+		raceVal.setText(immData2.getRace());
+		genderVal.setText(immData2.getGender());
+		requestedFormVal.setText(immData2.getRequestedDoc());
             }
         });
 

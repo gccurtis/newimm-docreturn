@@ -28,27 +28,27 @@ public class ApprovalScreenUI {
     private Stage stage;
 
     public ImmReqForm nextImmReqFormFromWorkflow(Workflow wf, Boolean desiredReviewFlag) {
-	WorkflowItem wfi = wf.getNextWorkflowItem();
-	if (wfi == null) {
-		return null;
-	}
-	while (wfi.getReviewFlag() != desiredReviewFlag) {
-		wfi = wf.getNextWorkflowItem();
-		if (wfi == null) {
-			return null;
-		}
-	}
-	return wfi.getForm();
+        WorkflowItem wfi = wf.getNextWorkflowItem();
+        if (wfi == null) {
+            return null;
+        }
+        while (wfi.getReviewFlag() != desiredReviewFlag) {
+            wfi = wf.getNextWorkflowItem();
+            if (wfi == null) {
+                return null;
+            }
+        }
+        return wfi.getForm();
     }
 
     public ApprovalScreenUI(Workflow wf) {
 
-	ImmReqForm immData = nextImmReqFormFromWorkflow(wf, false);
-	if (immData == null) {
-		System.out.println("No DATA");
-		System.exit(0);
-		return;
-	}
+        ImmReqForm immData = nextImmReqFormFromWorkflow(wf, false);
+        if (immData == null) {
+            System.out.println("No DATA");
+            System.exit(0);
+            return;
+        }
 
         stage = new Stage();
         stage.setTitle("Document Request Approval");
@@ -79,8 +79,10 @@ public class ApprovalScreenUI {
 
         Label dateOfBirthLabel = new Label("Date of Birth (MM/DD/YYYY):");
         grid.add(dateOfBirthLabel, 0, 4);
-        Label dateOfBirthVal = new Label(immData.getDateOfBirth().toString());
-	grid.add(dateOfBirthVal, 1, 4);
+        Label dateOfBirthVal = new Label(
+                immData.getDateOfBirth().getMonthValue() + "-" + immData.getDateOfBirth().getDayOfMonth() + "-"
+                        + immData.getDateOfBirth().getYear());
+        grid.add(dateOfBirthVal, 1, 4);
 
         Label idLabel = new Label("ID:");
         grid.add(idLabel, 0, 5);
@@ -130,24 +132,24 @@ public class ApprovalScreenUI {
             public void handle(ActionEvent e) {
                 actiontarget.setFill(Color.FIREBRICK);
                 actiontarget.setText("Application approved");
-		wf.dropImmReqForm(immData.getID());
+                wf.dropImmReqForm(immData.getID());
 
-		ImmReqForm immData2 = nextImmReqFormFromWorkflow(wf, false);
-		if (immData2 == null) {
-			System.out.println("No DATA");
-			System.exit(0);
-			return;
-		}
+                ImmReqForm immData2 = nextImmReqFormFromWorkflow(wf, false);
+                if (immData2 == null) {
+                    System.out.println("No DATA");
+                    System.exit(0);
+                    return;
+                }
 
-		firstNameVal.setText(immData2.getFirstName());
-		middleNameVal.setText(immData2.getMiddleName());
-		lastNameVal.setText(immData2.getLastName());
-		dateOfBirthVal.setText(immData2.getDateOfBirth().toString());
-		idVal.setText(new Integer(immData2.getID()).toString());
-		emailVal.setText(immData2.getEmail());
-		raceVal.setText(immData2.getRace());
-		genderVal.setText(immData2.getGender());
-		requestedFormVal.setText(immData2.getRequestedDoc());
+                firstNameVal.setText(immData2.getFirstName());
+                middleNameVal.setText(immData2.getMiddleName());
+                lastNameVal.setText(immData2.getLastName());
+                dateOfBirthVal.setText(immData2.getDateOfBirth().toString());
+                idVal.setText(new Integer(immData2.getID()).toString());
+                emailVal.setText(immData2.getEmail());
+                raceVal.setText(immData2.getRace());
+                genderVal.setText(immData2.getGender());
+                requestedFormVal.setText(immData2.getRequestedDoc());
             }
         });
 
@@ -156,25 +158,25 @@ public class ApprovalScreenUI {
             public void handle(ActionEvent e) {
                 actiontarget.setFill(Color.FIREBRICK);
                 actiontarget.setText("Application sent to Reviewer");
-		wf.dropImmReqForm(immData.getID());
-		wf.addWorkflowItemToDB(new WorkflowItem(immData,true));
+                wf.dropImmReqForm(immData.getID());
+                wf.addWorkflowItemToDB(new WorkflowItem(immData, true));
 
-		ImmReqForm immData2 = nextImmReqFormFromWorkflow(wf, false);
-		if (immData2 == null) {
-			System.out.println("No DATA");
-			System.exit(0);
-			return;
-		}
+                ImmReqForm immData2 = nextImmReqFormFromWorkflow(wf, false);
+                if (immData2 == null) {
+                    System.out.println("No DATA");
+                    System.exit(0);
+                    return;
+                }
 
-		firstNameVal.setText(immData2.getFirstName());
-		middleNameVal.setText(immData2.getMiddleName());
-		lastNameVal.setText(immData2.getLastName());
-		dateOfBirthVal.setText(immData2.getDateOfBirth().toString());
-		idVal.setText(new Integer(immData2.getID()).toString());
-		emailVal.setText(immData2.getEmail());
-		raceVal.setText(immData2.getRace());
-		genderVal.setText(immData2.getGender());
-		requestedFormVal.setText(immData2.getRequestedDoc());
+                firstNameVal.setText(immData2.getFirstName());
+                middleNameVal.setText(immData2.getMiddleName());
+                lastNameVal.setText(immData2.getLastName());
+                dateOfBirthVal.setText(immData2.getDateOfBirth().toString());
+                idVal.setText(new Integer(immData2.getID()).toString());
+                emailVal.setText(immData2.getEmail());
+                raceVal.setText(immData2.getRace());
+                genderVal.setText(immData2.getGender());
+                requestedFormVal.setText(immData2.getRequestedDoc());
             }
         });
 

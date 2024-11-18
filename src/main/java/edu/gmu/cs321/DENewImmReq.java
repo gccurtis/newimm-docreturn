@@ -130,8 +130,8 @@ public class DENewImmReq {
                         int year = Integer.parseInt(dateInfo[2]);
                         int id = Integer.parseInt(idString);
                         if (validateWord(firstName) && validateWord(middleName) && validateWord(lastName)
-                                && validateID(id) && validateWord(email) && validateWord(race)
-                                && validateWord(gender) && validateWord(requestedForm)) {
+                                && validateBirthYear(year) && validateID(id) && validateEmail(email)
+                                && validateWord(race) && validateWord(gender) && validateWord(requestedForm)) {
                             ImmReqForm newImmReqForm = new ImmReqForm(firstName, middleName, lastName,
                                     LocalDate.of(year, month, day), id, email, race, gender, requestedForm);
 
@@ -140,6 +140,17 @@ public class DENewImmReq {
                             WorkflowItem newWorkflowItem = new WorkflowItem(newImmReqForm, true);
                             workflow.addWorkflowItemToDB(newWorkflowItem);
                             actiontarget.setText("New Request Form Submitted");
+
+                            // Clears all the text fields for additional submissions
+                            firstNameTextField.clear();
+                            middleNameTextField.clear();
+                            lastNameTextField.clear();
+                            dateOfBirthTextField.clear();
+                            iDTextField.clear();
+                            emailTextField.clear();
+                            raceTextField.clear();
+                            genderTextField.clear();
+                            requestedFormTextField.clear();
                         } else {
                             actiontarget.setText(invalidInput);
                         }

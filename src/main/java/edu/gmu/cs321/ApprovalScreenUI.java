@@ -27,25 +27,29 @@ public class ApprovalScreenUI {
 
     private Stage stage;
 
-    public ApprovalScreenUI(Workflow wf) {
-        // Create a function to pass next ImmReqForm
-	// TODO: Handle an empty database
-	
+    public ImmReqForm nextImmReqFormFromWorkflow(Workflow wf, Boolean desiredReviewFlag) {
 	WorkflowItem wfi = wf.getNextWorkflowItem();
 	if (wfi == null) {
-		System.out.println("No DATA 1");
-		return;
+		return null;
 	}
-	while (wfi.getReviewFlag()) {
+	while (wfi.getReviewFlag() != desiredReviewFlag) {
 		wfi = wf.getNextWorkflowItem();
 		if (wfi == null) {
-			System.out.println("No DATA");
-			return;
+			return null;
 		}
 	}
+	return wfi.getForm();
+    }
 
-	ImmReqForm immData = wfi.getForm();
-	
+    public ApprovalScreenUI(Workflow wf) {
+
+	ImmReqForm immData = nextImmReqFormFromWorkflow(wf, false);
+	if (immData == null) {
+		System.out.println("No DATA");
+		System.exit(0);
+		return;
+	}
+
         stage = new Stage();
         stage.setTitle("Document Request Approval");
         GridPane grid = new GridPane();
@@ -76,7 +80,6 @@ public class ApprovalScreenUI {
         Label dateOfBirthLabel = new Label("Date of Birth (MM/DD/YYYY):");
         grid.add(dateOfBirthLabel, 0, 4);
         Label dateOfBirthVal = new Label(immData.getDateOfBirth().toString());
-        //Label dateOfBirthVal = new Label("Work-In-Progress");
 	grid.add(dateOfBirthVal, 1, 4);
 
         Label idLabel = new Label("ID:");
@@ -126,7 +129,8 @@ public class ApprovalScreenUI {
             @Override
             public void handle(ActionEvent e) {
                 actiontarget.setFill(Color.FIREBRICK);
-                actiontarget.setText("Approval button pressed");
+                actiontarget.setText("Application approved");
+		wf.dropImmReqForm(immData.getID());
             }
         });
 
@@ -134,7 +138,9 @@ public class ApprovalScreenUI {
             @Override
             public void handle(ActionEvent e) {
                 actiontarget.setFill(Color.FIREBRICK);
-                actiontarget.setText("Reject button pressed");
+                actiontarget.setText("Application sent to Reviewer");
+		wf.dropImmReqForm(immData.getID());
+		wf.addWorkflowItemToDB(new WorkflowItem(immData,true));
             }
         });
 

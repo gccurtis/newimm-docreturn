@@ -51,6 +51,19 @@ public class Workflow {
 		}
 	}
 
+	public void dropImmReqForm(int ID) {
+		String deleteQuery = "DELETE FROM testdb WHERE id = ?";
+		try (Connection conn = DriverManager.getConnection(mySqlUrl, mySqlUsername, mySqlPassword);
+				PreparedStatement pstmt = conn.prepareStatement(deleteQuery)) {
+
+		pstmt.setInt(1, ID);
+		int rowsAffected = pstmt.executeUpdate();
+		System.out.printf("ID PASSED: %d\n# of ROWS DELETED: %d\n", ID, rowsAffected);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
 	public Workflow() {
 		this.queue = new LinkedList<WorkflowItem>();
 

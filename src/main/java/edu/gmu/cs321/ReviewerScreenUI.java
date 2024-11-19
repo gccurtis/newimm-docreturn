@@ -23,6 +23,7 @@ import javafx.stage.Stage;
 public class ReviewerScreenUI {
 
         private Stage stage;
+	private ImmReqForm immData;
 
         public ImmReqForm nextImmReqFormFromWorkflow(Workflow wf, Boolean desiredReviewFlag) {
                 WorkflowItem wfi = wf.getNextWorkflowItem();
@@ -40,7 +41,7 @@ public class ReviewerScreenUI {
 
         public ReviewerScreenUI(Workflow wf) {
 
-                ImmReqForm immData = nextImmReqFormFromWorkflow(wf, true);
+                immData = nextImmReqFormFromWorkflow(wf, true);
                 if (immData == null) {
                         System.out.println("No DATA");
                         System.exit(0);
@@ -141,6 +142,7 @@ public class ReviewerScreenUI {
                         public void handle(ActionEvent e) {
                                 actiontarget.setFill(Color.GREEN);
                                 actiontarget.setText("Data updated successfully");
+                                wf.dropImmReqForm(immData.getID());
                                 String firstName = firstNameTextField.getText();
                                 if (firstName != "")
                                         immData.setFirstName(firstName);
@@ -169,7 +171,6 @@ public class ReviewerScreenUI {
                                 String requestedForm = requestedFormTextField.getText();
                                 if (requestedForm != "")
                                         immData.setRequestedDoc(requestedForm);
-                                wf.dropImmReqForm(immData.getID());
                                 wf.addWorkflowItemToDB(new WorkflowItem(immData, false));
 
                                 ImmReqForm immData2 = nextImmReqFormFromWorkflow(wf, true);
@@ -188,6 +189,16 @@ public class ReviewerScreenUI {
                                 raceVal.setText(immData2.getRace());
                                 genderVal.setText(immData2.getGender());
                                 requestedFormVal.setText(immData2.getRequestedDoc());
+
+				immData.setFirstName(immData2.getFirstName());
+				immData.setMiddleName(immData2.getMiddleName());
+				immData.setLastName(immData2.getLastName());
+				immData.setDateOfBirth(immData2.getDateOfBirth());
+				immData.setID(immData2.getID());
+				immData.setEmail(immData2.getEmail());
+				immData.setRace(immData2.getRace());
+				immData.setGender(immData2.getGender());
+				immData.setRequestedDoc(immData2.getRequestedDoc());
                         }
                 });
 

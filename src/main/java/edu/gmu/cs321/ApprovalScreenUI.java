@@ -26,6 +26,7 @@ import java.sql.SQLException;
 public class ApprovalScreenUI {
 
     private Stage stage;
+    private ImmReqForm immDataBig;
 
     public ImmReqForm nextImmReqFormFromWorkflow(Workflow wf, Boolean desiredReviewFlag) {
         WorkflowItem wfi = wf.getNextWorkflowItem();
@@ -43,8 +44,8 @@ public class ApprovalScreenUI {
 
     public ApprovalScreenUI(Workflow wf) {
 
-        ImmReqForm immData = nextImmReqFormFromWorkflow(wf, false);
-        if (immData == null) {
+        immDataBig = nextImmReqFormFromWorkflow(wf, false);
+        if (immDataBig == null) {
             System.out.println("No DATA");
             System.exit(0);
             return;
@@ -64,49 +65,49 @@ public class ApprovalScreenUI {
 
         Label firstName = new Label("First Name:");
         grid.add(firstName, 0, 1);
-        Label firstNameVal = new Label(immData.getFirstName());
+        Label firstNameVal = new Label(immDataBig.getFirstName());
         grid.add(firstNameVal, 1, 1);
 
         Label middleName = new Label("Middle Name:");
         grid.add(middleName, 0, 2);
-        Label middleNameVal = new Label(immData.getMiddleName());
+        Label middleNameVal = new Label(immDataBig.getMiddleName());
         grid.add(middleNameVal, 1, 2);
 
         Label lastName = new Label("Last Name:");
         grid.add(lastName, 0, 3);
-        Label lastNameVal = new Label(immData.getLastName());
+        Label lastNameVal = new Label(immDataBig.getLastName());
         grid.add(lastNameVal, 1, 3);
 
         Label dateOfBirthLabel = new Label("Date of Birth (MM/DD/YYYY):");
         grid.add(dateOfBirthLabel, 0, 4);
         Label dateOfBirthVal = new Label(
-                immData.getDateOfBirth().getMonthValue() + "-" + immData.getDateOfBirth().getDayOfMonth() + "-"
-                        + immData.getDateOfBirth().getYear());
+                immDataBig.getDateOfBirth().getMonthValue() + "-" + immDataBig.getDateOfBirth().getDayOfMonth() + "-"
+                        + immDataBig.getDateOfBirth().getYear());
         grid.add(dateOfBirthVal, 1, 4);
 
         Label idLabel = new Label("ID:");
         grid.add(idLabel, 0, 5);
-        Label idVal = new Label(new Integer(immData.getID()).toString());
+        Label idVal = new Label(new Integer(immDataBig.getID()).toString());
         grid.add(idVal, 1, 5);
 
         Label emailLabel = new Label("Email:");
         grid.add(emailLabel, 0, 6);
-        Label emailVal = new Label(immData.getEmail());
+        Label emailVal = new Label(immDataBig.getEmail());
         grid.add(emailVal, 1, 6);
 
         Label raceLabel = new Label("Race:");
         grid.add(raceLabel, 0, 7);
-        Label raceVal = new Label(immData.getRace());
+        Label raceVal = new Label(immDataBig.getRace());
         grid.add(raceVal, 1, 7);
 
         Label genderLabel = new Label("Gender:");
         grid.add(genderLabel, 0, 8);
-        Label genderVal = new Label(immData.getGender());
+        Label genderVal = new Label(immDataBig.getGender());
         grid.add(genderVal, 1, 8);
 
         Label requestedFormLabel = new Label("Requested Form:");
         grid.add(requestedFormLabel, 0, 9);
-        Label requestedFormVal = new Label(immData.getRequestedDoc());
+        Label requestedFormVal = new Label(immDataBig.getRequestedDoc());
         grid.add(requestedFormVal, 1, 9);
 
         Button btn = new Button("Approve");
@@ -132,7 +133,7 @@ public class ApprovalScreenUI {
             public void handle(ActionEvent e) {
                 actiontarget.setFill(Color.FIREBRICK);
                 actiontarget.setText("Application approved");
-                wf.dropImmReqForm(immData.getID());
+                wf.dropImmReqForm(immDataBig.getID());
 
                 ImmReqForm immData2 = nextImmReqFormFromWorkflow(wf, false);
                 if (immData2 == null) {
@@ -150,6 +151,16 @@ public class ApprovalScreenUI {
                 raceVal.setText(immData2.getRace());
                 genderVal.setText(immData2.getGender());
                 requestedFormVal.setText(immData2.getRequestedDoc());
+
+		immDataBig.setFirstName(immData2.getFirstName());
+		immDataBig.setMiddleName(immData2.getMiddleName());
+		immDataBig.setLastName(immData2.getLastName());
+		immDataBig.setDateOfBirth(immData2.getDateOfBirth());
+		immDataBig.setID(immData2.getID());
+		immDataBig.setEmail(immData2.getEmail());
+		immDataBig.setRace(immData2.getRace());
+		immDataBig.setGender(immData2.getGender());
+		immDataBig.setRequestedDoc(immData2.getRequestedDoc());
             }
         });
 
@@ -158,8 +169,8 @@ public class ApprovalScreenUI {
             public void handle(ActionEvent e) {
                 actiontarget.setFill(Color.FIREBRICK);
                 actiontarget.setText("Application sent to Reviewer");
-                wf.dropImmReqForm(immData.getID());
-                wf.addWorkflowItemToDB(new WorkflowItem(immData, true));
+                wf.dropImmReqForm(immDataBig.getID());
+                wf.addWorkflowItemToDB(new WorkflowItem(immDataBig, true));
 
                 ImmReqForm immData2 = nextImmReqFormFromWorkflow(wf, false);
                 if (immData2 == null) {
@@ -177,6 +188,16 @@ public class ApprovalScreenUI {
                 raceVal.setText(immData2.getRace());
                 genderVal.setText(immData2.getGender());
                 requestedFormVal.setText(immData2.getRequestedDoc());
+
+		immDataBig.setFirstName(immData2.getFirstName());
+		immDataBig.setMiddleName(immData2.getMiddleName());
+		immDataBig.setLastName(immData2.getLastName());
+		immDataBig.setDateOfBirth(immData2.getDateOfBirth());
+		immDataBig.setID(immData2.getID());
+		immDataBig.setEmail(immData2.getEmail());
+		immDataBig.setRace(immData2.getRace());
+		immDataBig.setGender(immData2.getGender());
+		immDataBig.setRequestedDoc(immData2.getRequestedDoc());
             }
         });
 
